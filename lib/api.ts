@@ -16,7 +16,7 @@ export type NoteListResponse = {
   total: number;
 };
 
-axios.defaults.baseURL = process.env.NEXT_NOTES_URL;
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_NOTES_URL;
 
 export const getNotes = async () => {
   const res = await axios.get<NoteListResponse>("/notes");
