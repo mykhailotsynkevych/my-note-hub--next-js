@@ -1,6 +1,3 @@
-// "use client";
-
-// import { useState } from "react";
 import { getNotes } from "@/lib/api";
 import NoteList from "@/components/NoteList";
 
