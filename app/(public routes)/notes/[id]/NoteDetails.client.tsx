@@ -3,11 +3,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { getSingleNote } from '@/lib/api';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { notFound } from 'next/navigation';
 
 const NoteDetailsClient = () => {
   const { id } = useParams<{ id: string }>();
+  const router = useRouter();
 
   const {
     data: note,
@@ -35,19 +36,27 @@ const NoteDetailsClient = () => {
     day: 'numeric',
   });
 
+const handleGoBack = () => {
+  const isSure = confirm('Are you sure?');
+  if (isSure) {
+    router.back();
+  }
+};
+
   return (
     <section className="relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.12),transparent_30%),radial-gradient(circle_at_top_right,rgba(250,204,21,0.14),transparent_28%),linear-gradient(180deg,#f8fafc_0%,#ffffff_72%)]" />
 
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4">
-          <Link
-            href="/notes"
+          <button
             className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur transition hover:border-slate-300 hover:text-slate-900"
+            onClick={handleGoBack}
           >
+            {' '}
             <span aria-hidden="true">←</span>
             Back to notes
-          </Link>
+          </button>
 
           <div className="max-w-3xl">
             <span className="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-sky-700">
