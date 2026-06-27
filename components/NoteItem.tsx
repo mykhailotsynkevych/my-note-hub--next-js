@@ -18,7 +18,7 @@ const NoteItem = ({ item }: Props) => {
         <div className="flex items-start justify-between gap-3">
           <h2 className="line-clamp-2 text-lg font-semibold text-slate-900">{item.title}</h2>
           <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
-            Note
+            {item.category.name}
           </span>
         </div>
 

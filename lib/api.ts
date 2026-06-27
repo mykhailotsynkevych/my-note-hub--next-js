@@ -9,6 +9,13 @@ export type Note = {
   userId: string;
   createdAt: string;
   updatedAt: string;
+  category: {
+    id: string;
+    name: string;
+    description: string;
+    createdAt: string;
+    updatedAt: string;
+  };
 };
 
 export type Category = {
@@ -26,8 +33,10 @@ export type NoteListResponse = {
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_NOTES_URL;
 
-export const getNotes = async () => {
-  const res = await axios.get<NoteListResponse>("/notes");
+export const getNotes = async (categoryId?: string) => {
+  const res = await axios.get<NoteListResponse>('/notes', {
+    params: { categoryId },
+  });
   return res.data;
 };
 

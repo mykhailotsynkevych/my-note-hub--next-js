@@ -1,12 +1,10 @@
 import Link from 'next/link';
 import { getCategories } from '@/lib/api';
+import CategoriesMenu from './CategoriesMenu';
 
 const Header = async () => {
   const categories = await getCategories();
 
-    const handleClick = () => {
-    console.log('Clicked category button');
-  };
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
@@ -21,29 +19,35 @@ const Header = async () => {
 
         <nav aria-label="Main Navigation">
           <ul className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50/90 p-1 text-sm font-medium text-slate-600 shadow-sm">
-          <li>
-            <Link href="/" className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900">
-              Home
-            </Link>
-          </li>
-                    <li><button onClick={handleClick}>Open menu</button></li>
-          <li>
-            <Link href="/notes" className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900">
-              Notes
-            </Link>
-          </li>
-          <li>
-            <Link href="/profile" className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900">
-              Profile
-            </Link>
-          </li>
-          <li>
-            <Link href="/about" className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900">
-              About
-            </Link>
-          </li>
-        </ul>
-      </nav>
+            <li>
+              <Link
+                href="/"
+                className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <CategoriesMenu categories={categories} />
+            </li>
+            <li>
+              <Link
+                href="/profile"
+                className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900"
+              >
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about"
+                className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900"
+              >
+                About
+              </Link>
+            </li>
+          </ul>
+        </nav>
       </div>
     </header>
   );
