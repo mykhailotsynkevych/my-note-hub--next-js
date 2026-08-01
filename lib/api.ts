@@ -1,5 +1,11 @@
 import axios from "axios";
 
+export type NewNoteData = {
+  title: string;
+  content: string;
+  categoryId: string;
+};
+
 
 export type Note = {
   id: string;
@@ -47,5 +53,10 @@ export const getSingleNote = async (id: string) => {
 
 export const getCategories = async () => {
   const res = await axios.get<Category[]>('/categories');
+  return res.data;
+};
+
+export const createNote = async (data: NewNoteData) => {
+  const res = await axios.post<Note>('/notes', data);
   return res.data;
 };
