@@ -1,8 +1,9 @@
 'use client';
 
+import { Category, createNote, NewNoteData } from '@/lib/api';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { Category, createNote, NewNoteData } from '@/lib/api';
+import { useNoteDraftStore } from '@/lib/stores/noteStore';
 
 type Props = {
   categories: Category[];
@@ -10,9 +11,25 @@ type Props = {
 
 const NoteForm = ({ categories }: Props) => {
   const router = useRouter();
+  //STORE
+  const { draft, setDraft, clearDraft } = useNoteDraftStore();
+  // Оголошуємо функцію для onChange щоб при зміні будь-якого
+  // елемента форми оновити чернетку нотатки в сторі
+  const handleChange = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
+    // 4. Коли користувач змінює будь-яке поле форми — оновлюємо стан
+    setDraft({
+      ...draft,
+      [event.target.name]: event.target.value,
+    });
+  };
   const { mutate, isPending, isError } = useMutation({
     mutationFn: createNote,
     onSuccess: () => {
+      clearDraft();
       router.push('/notes/filter/all');
     },
   });
@@ -31,6 +48,8 @@ const NoteForm = ({ categories }: Props) => {
         <input
           type="text"
           name="title"
+          defaultValue={draft?.title}
+          onChange={handleChange}
           required
           minLength={3}
           maxLength={120}
@@ -43,6 +62,8 @@ const NoteForm = ({ categories }: Props) => {
         <span className="text-sm font-semibold text-slate-700">Content</span>
         <textarea
           name="content"
+          defaultValue={draft?.content}
+          onChange={handleChange}
           required
           minLength={10}
           rows={8}
@@ -56,7 +77,8 @@ const NoteForm = ({ categories }: Props) => {
         <select
           name="categoryId"
           required
-          defaultValue={categories[0]?.id ?? ''}
+          defaultValue={draft?.categoryId}
+          onChange={handleChange}
           className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100"
         >
           {categories.map((category) => (
