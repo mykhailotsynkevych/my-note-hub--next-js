@@ -115,6 +115,8 @@ const SignUp = () => {
               By registering, you agree to our terms and privacy policy.
             </p>
 
+            {error && <p>{error}</p>}
+            
             <button
               type="submit"
               className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"
@@ -122,7 +124,6 @@ const SignUp = () => {
               Register
             </button>
           </form>
-          {error && <p>{error}</p>}
         </div>
       </section>
     </main>

@@ -44,6 +44,12 @@ export type RegisterRequest = {
   userName: string;
 };
 
+export type LoginRequest = {
+  email: string;
+  password: string;
+};
+
+
 export type User = {
   id: string;
   email: string;
@@ -84,5 +90,10 @@ export const createNote = async (data: NewNoteData) => {
 //AUTH
 export const register = async (data: RegisterRequest) => {
   const res = await nextServer.post<User>('/auth/register', data);
+  return res.data;
+};
+
+export const login = async (data: LoginRequest) => {
+  const res = await nextServer.post<User>('/auth/login', data);
   return res.data;
 };
