@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { getCategories } from '@/lib/api';
 import CategoriesMenu from './CategoriesMenu';
+import AuthNavigation from './AuthNavigation';
 
 const Header = async () => {
   const categories = await getCategories();
@@ -46,22 +47,7 @@ const Header = async () => {
                 About
               </Link>
             </li>
-            <li>
-              <Link
-                href="/sign-in"
-                className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900"
-              >
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/sign-up"
-                className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900"
-              >
-                Register
-              </Link>
-            </li>
+            <AuthNavigation />
           </ul>
         </nav>
       </div>

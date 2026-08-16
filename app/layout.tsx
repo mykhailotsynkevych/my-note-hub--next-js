@@ -7,6 +7,8 @@ import '../styles/globals.css';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 
+import AuthProvider from '@/components/AuthProvider';
+
 const roboto = Roboto({
   subsets: ['latin'], 
   weight: ['400', '700'],
@@ -36,13 +38,15 @@ export default function RootLayout({
         className="flex min-h-full flex-col bg-slate-50 text-slate-900"
       >
         <TanStackProvider>
-          <Header />
-          <main className="flex-1">
-            {children}
-            {modal}
-          </main>
+          <AuthProvider>
+            <Header />
+            <main className="flex-1">
+              {children}
+              {modal}
+            </main>
 
-          <Footer />
+            <Footer />
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>

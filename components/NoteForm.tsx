@@ -3,7 +3,7 @@
 import { Category, createNote, NewNoteData } from '@/lib/api';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useNoteDraftStore } from '@/lib/stores/noteStore';
+import { useNoteDraftStore } from '@/lib/store/noteStore';
 
 type Props = {
   categories: Category[];
