@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
-import { getSingleNote } from '@/lib/api';
+import { getSingleNote } from '@/lib/api/api';
 import { useRouter } from 'next/navigation';
 import { notFound } from 'next/navigation';
 

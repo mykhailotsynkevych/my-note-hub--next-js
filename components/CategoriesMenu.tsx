@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Category, getCategories } from '@/lib/api'
+import { Category, getCategories } from '@/lib/api/clientApi'
 
 
 const CategoriesMenu = () => {

@@ -1,4 +1,4 @@
-import axios from "axios";
+import { nextServer } from './api';
 
 export type NewNoteData = {
   title: string;
@@ -62,13 +62,6 @@ export type User = {
 type CheckSessionRequest = {
   success: boolean;
 };
-
-
-// axios.defaults.baseURL = process.env.NEXT_PUBLIC_NOTES_URL;
-const nextServer = axios.create({
-  baseURL: 'http://localhost:3000/api',
-  withCredentials: true, // дозволяє axios працювати з cookie
-});
 
 export const getNotes = async (categoryId?: string) => {
   const res = await nextServer.get<NoteListResponse>('/notes', {

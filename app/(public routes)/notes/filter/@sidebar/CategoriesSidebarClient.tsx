@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Category } from '@/lib/api';
+import { Category } from '@/lib/api/api';
 
 type Props = {
   categories: Category[];
