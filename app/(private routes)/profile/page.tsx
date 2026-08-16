@@ -1,10 +1,8 @@
-'use client';
-
 import Link from 'next/link';
-import { useAuthStore } from '@/lib/store/authStore';
+import { getServerMe } from '@/lib/api/serverApi';
 
-const Profile = () => {
-  const { user } = useAuthStore();
+const Profile = async () => {
+  const user = await getServerMe();
 
   return (
     <section className="relative isolate overflow-hidden">
@@ -20,9 +18,9 @@ const Profile = () => {
             My Profile
           </h1>
           <h2 className="mt-3 text-lg font-semibold text-slate-700">
-            Name: {user?.userName}
+            Name: {user.userName}
             <br />
-            Email: {user?.email}
+            Email: {user.email}
           </h2>
 
           <div className="prose prose-slate mt-6 max-w-none border-t border-slate-100 pt-6">
