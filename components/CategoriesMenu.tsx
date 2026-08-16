@@ -1,16 +1,22 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Category } from '@/lib/api';
+import { Category, getCategories } from '@/lib/api'
 
-type Props = {
-  categories: Category[];
-};
 
-const CategoriesMenu = ({ categories }: Props) => {
+const CategoriesMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
+
+  	// Додаємо стан
+ const [categories, setCategories] = useState<Category[]>([]);
+
+	// Додаємо ефект для запиту
+	useEffect(() => {
+		// Змінюємо стан
+		getCategories().then(data => setCategories(data));
+  }, []);
 
   return (
     <div className="relative">

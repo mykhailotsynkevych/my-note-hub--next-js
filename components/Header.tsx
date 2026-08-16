@@ -1,11 +1,8 @@
 import Link from 'next/link';
-import { getCategories } from '@/lib/api';
 import CategoriesMenu from './CategoriesMenu';
 import AuthNavigation from './AuthNavigation';
 
-const Header = async () => {
-  const categories = await getCategories();
-
+const Header = () => {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
@@ -29,7 +26,7 @@ const Header = async () => {
               </Link>
             </li>
             <li>
-              <CategoriesMenu categories={categories} />
+              <CategoriesMenu />
             </li>
             <li>
               <Link
