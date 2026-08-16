@@ -2,20 +2,25 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { register, RegisterRequest } from '@/lib/api';
-import { ApiError } from '@/app/api/api'
+import { useAuthStore } from '@/lib/store/authStore';
+import { ApiError } from '@/app/api/api';
 
 const SignUp = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+  // Отримуємо метод із стора
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (formData: FormData) => {
     try {
-	    // Типізуємо дані форми
+      // Типізуємо дані форми
       const formValues = Object.fromEntries(formData) as RegisterRequest;
       // Виконуємо запит
       const res = await register(formValues);
       // Виконуємо редірект або відображаємо помилку
       if (res) {
+        // Записуємо користувача у глобальний стан
+        setUser(res);
         router.push('/profile');
       } else {
         setError('Invalid email or password');
@@ -24,8 +29,8 @@ const SignUp = () => {
       setError(
         (error as ApiError).response?.data?.error ??
           (error as ApiError).message ??
-          'Oops... some error'
-      )
+          'Oops... some error',
+      );
     }
   };
 
@@ -42,7 +47,8 @@ const SignUp = () => {
             Create your account and start capturing ideas.
           </h1>
           <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg">
-            Keep your notes organized, searchable, and synced with a clean workspace built for focus.
+            Keep your notes organized, searchable, and synced with a clean
+            workspace built for focus.
           </p>
 
           <div className="grid gap-4 sm:grid-cols-2">
@@ -51,7 +57,8 @@ const SignUp = () => {
                 Private space
               </p>
               <p className="mt-3 text-sm leading-6 text-slate-600">
-                Personal profile and notes area available right after registration.
+                Personal profile and notes area available right after
+                registration.
               </p>
             </article>
 
@@ -60,7 +67,8 @@ const SignUp = () => {
                 Fast setup
               </p>
               <p className="mt-3 text-sm leading-6 text-slate-600">
-                Start in less than a minute with just username, email, and password.
+                Start in less than a minute with just username, email, and
+                password.
               </p>
             </article>
           </div>
@@ -73,7 +81,9 @@ const SignUp = () => {
 
           <form action={handleSubmit} className="mt-5 grid gap-5">
             <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-700">Username</span>
+              <span className="text-sm font-semibold text-slate-700">
+                Username
+              </span>
               <input
                 type="text"
                 name="userName"
@@ -87,7 +97,9 @@ const SignUp = () => {
             </label>
 
             <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-700">Email</span>
+              <span className="text-sm font-semibold text-slate-700">
+                Email
+              </span>
               <input
                 type="email"
                 name="email"
@@ -99,7 +111,9 @@ const SignUp = () => {
             </label>
 
             <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-700">Password</span>
+              <span className="text-sm font-semibold text-slate-700">
+                Password
+              </span>
               <input
                 type="password"
                 name="password"
@@ -116,7 +130,7 @@ const SignUp = () => {
             </p>
 
             {error && <p>{error}</p>}
-            
+
             <button
               type="submit"
               className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"

@@ -3,21 +3,26 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { login, LoginRequest } from '@/lib/api';
-import { ApiError } from '@/app/api/api'
+import { useAuthStore } from '@/lib/store/authStore';
+import { ApiError } from '@/app/api/api';
 
 const SignIn = () => {
   const router = useRouter();
   const [error, setError] = useState('');
 
+  // Отримуємо метод із стора
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (formData: FormData) => {
     try {
-	    // Типізуємо дані форми
+      // Типізуємо дані форми
       const formValues = Object.fromEntries(formData) as LoginRequest;
       // Виконуємо запит
       const res = await login(formValues);
       // Виконуємо редірект або відображаємо помилку
       if (res) {
+        // Записуємо користувача у глобальний стан
+        setUser(res);
         router.push('/profile');
       } else {
         setError('Invalid email or password');
@@ -26,8 +31,8 @@ const SignIn = () => {
       setError(
         (error as ApiError).response?.data?.error ??
           (error as ApiError).message ??
-          'Oops... some error'
-      )
+          'Oops... some error',
+      );
     }
   };
 
@@ -47,7 +52,9 @@ const SignIn = () => {
 
           <form action={handleSubmit} className="mt-6 grid gap-5">
             <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-700">Email</span>
+              <span className="text-sm font-semibold text-slate-700">
+                Email
+              </span>
               <input
                 type="email"
                 name="email"
@@ -59,7 +66,9 @@ const SignIn = () => {
             </label>
 
             <label className="grid gap-2">
-              <span className="text-sm font-semibold text-slate-700">Password</span>
+              <span className="text-sm font-semibold text-slate-700">
+                Password
+              </span>
               <input
                 type="password"
                 name="password"
@@ -71,7 +80,7 @@ const SignIn = () => {
             </label>
 
             {error && <p>{error}</p>}
-            
+
             <button
               type="submit"
               className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800"

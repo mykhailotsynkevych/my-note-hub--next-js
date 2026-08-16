@@ -1,6 +1,11 @@
+'use client';
+
 import Link from 'next/link';
+import { useAuthStore } from '@/lib/store/authStore';
 
 const Profile = () => {
+  const { user } = useAuthStore();
+
   return (
     <section className="relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.12),transparent_30%),radial-gradient(circle_at_top_right,rgba(250,204,21,0.14),transparent_28%),linear-gradient(180deg,#f8fafc_0%,#ffffff_72%)]" />
@@ -15,15 +20,17 @@ const Profile = () => {
             My Profile
           </h1>
           <h2 className="mt-3 text-lg font-semibold text-slate-700">
-            Name: User name
+            Name: {user?.userName}
+            <br />
+            Email: {user?.email}
           </h2>
 
           <div className="prose prose-slate mt-6 max-w-none border-t border-slate-100 pt-6">
             <p className="text-base leading-8 text-slate-700 sm:text-lg">
               Some description: Lorem, ipsum dolor sit amet consectetur
-              adipisicing elit. Cumque non quis, vero consectetur eum at
-              commodi facere error, laborum, rerum labore corrupti neque
-              veritatis sed minima et nam. Autem, cumque.
+              adipisicing elit. Cumque non quis, vero consectetur eum at commodi
+              facere error, laborum, rerum labore corrupti neque veritatis sed
+              minima et nam. Autem, cumque.
             </p>
           </div>
 
