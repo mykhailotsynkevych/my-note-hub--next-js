@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { getCategories } from '@/lib/api';
+// import { getCategories } from '@/lib/api';
 import CategoriesMenu from './CategoriesMenu';
 
 const Header = async () => {
-  const categories = await getCategories();
+  // const categories = await getCategories();
 
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
@@ -27,23 +27,15 @@ const Header = async () => {
                 Home
               </Link>
             </li>
-            <li>
+            {/* <li>
               <CategoriesMenu categories={categories} />
-            </li>
+            </li> */}
             <li>
               <Link
                 href="/profile"
                 className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900"
               >
                 Profile
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/about"
-                className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900"
-              >
-                About
               </Link>
             </li>
           </ul>
