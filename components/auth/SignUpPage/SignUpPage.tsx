@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import css from './SignUpPage.module.css';
 
 const SignUpPage = () => {
@@ -33,6 +34,10 @@ const SignUpPage = () => {
         </div>
 
         <p className={css.error}></p>
+
+        <p className={css.switchText}>
+          Already have an account? <Link href="/sign-in">Sign in</Link>
+        </p>
       </form>
     </main>
   );
