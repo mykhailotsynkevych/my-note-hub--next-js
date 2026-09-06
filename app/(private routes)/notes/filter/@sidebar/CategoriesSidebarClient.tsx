@@ -2,15 +2,15 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Category } from '@/lib/api/api';
+// import { Category } from '@/lib/api/api';
 
 type Props = {
-  categories: Category[];
-  countsByCategory: Record<string, number>;
+  // categories: Category[];
+  // countsByCategory: Record<string, number>;
   allNotesCount: number;
 };
 
-const CategoriesSidebarClient = ({ categories, countsByCategory, allNotesCount }: Props) => {
+const CategoriesSidebarClient = ({  allNotesCount }: Props) => {
   const pathname = usePathname();
 
   const isAllActive = pathname === '/notes/filter/all';
@@ -40,7 +40,7 @@ const CategoriesSidebarClient = ({ categories, countsByCategory, allNotesCount }
 
       <li className="my-1 h-px bg-slate-100" />
 
-      {categories.map((category) => {
+      {/* {categories.map((category) => {
         const href = `/notes/filter/${category.id}`;
         const isActive = pathname === href;
         const noteCount = countsByCategory[category.id] ?? 0;
@@ -90,7 +90,7 @@ const CategoriesSidebarClient = ({ categories, countsByCategory, allNotesCount }
             </Link>
           </li>
         );
-      })}
+      })} */}
     </ul>
   );
 };

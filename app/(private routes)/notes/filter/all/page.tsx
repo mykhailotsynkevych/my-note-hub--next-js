@@ -1,4 +1,4 @@
-import { getNotes } from "@/lib/api/api";
+import { getNotes } from "@/lib/api/clientApi";
 import NoteList from "@/components/NoteList";
 
 
@@ -14,7 +14,7 @@ const Notes = async () => {
         <h1 className="mt-4 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl">
           Notes List
           <span className="ml-3 inline-flex -translate-y-1.5 rounded-2xl bg-slate-900 px-3 py-1 text-sm font-bold text-white sm:text-2xl">
-            {response?.total ?? 0}
+            {response?.totalPages ?? 0}
           </span>
         </h1>
         <p className="mt-3 text-base leading-7 text-slate-600 sm:text-lg">

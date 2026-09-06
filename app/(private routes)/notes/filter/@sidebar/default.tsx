@@ -1,23 +1,23 @@
 import Link from 'next/link';
-import { getCategories, getNotes } from '@/lib/api/api';
+import { getNotes } from '@/lib/api/clientApi';
 import CategoriesSidebarClient from './CategoriesSidebarClient';
 
 const NotesSidebar = async () => {
-  const categories = await getCategories();
+  // const categories = await getCategories();
   const allNotesResponse = await getNotes();
-  const allNotesCount = allNotesResponse.total;
-  const categoryCountEntries = await Promise.all(
-    categories.map(async (category) => {
-      try {
-        const response = await getNotes(category.id);
-        return [category.id, response.total] as const;
-      } catch {
-        return [category.id, 0] as const;
-      }
-    }),
-  );
+  const allNotesCount = allNotesResponse.totalPages;
+  // const categoryCountEntries = await Promise.all(
+  //   categories.map(async (category) => {
+  //     try {
+  //       const response = await getNotes(category.id);
+  //       return [category.id, response.total] as const;
+  //     } catch {
+  //       return [category.id, 0] as const;
+  //     }
+  //   }),
+  // );
 
-  const countsByCategory = Object.fromEntries(categoryCountEntries);
+  // const countsByCategory = Object.fromEntries(categoryCountEntries);
 
   return (
     <div className="overflow-hidden rounded-3xl border border-slate-200/80 bg-white/90 shadow-[0_24px_60px_-36px_rgba(15,23,42,0.45)] backdrop-blur">
@@ -46,8 +46,8 @@ const NotesSidebar = async () => {
       </div>
 
       <CategoriesSidebarClient
-        categories={categories}
-        countsByCategory={countsByCategory}
+        // categories={categories}
+        // countsByCategory={countsByCategory}
         allNotesCount={allNotesCount}
       />
     </div>

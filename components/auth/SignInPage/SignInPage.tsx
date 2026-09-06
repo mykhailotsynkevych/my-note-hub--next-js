@@ -25,7 +25,7 @@ const SignInPage = () => {
       if (res) {
         // Записуємо користувача у глобальний стан
         setUser(res);
-        router.push('/profile');
+        router.push('/notes/filter/all');
       } else {
         setError('Invalid email or password');
       }
