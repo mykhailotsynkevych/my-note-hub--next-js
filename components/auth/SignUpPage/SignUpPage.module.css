@@ -39,6 +39,31 @@
   border-radius: 4px;
 }
 
+.passwordWrapper {
+  position: relative;
+  margin-top: 4px;
+}
+
+.passwordWrapper .input {
+  margin-top: 0;
+  width: 100%;
+  padding-right: 56px;
+}
+
+.togglePassword {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0d6efd;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 .actions {
   display: flex;
   justify-content: flex-end;

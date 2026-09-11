@@ -7,14 +7,19 @@ import { logErrorResponse } from '../../_utils/utils';
 
 export async function POST(req: NextRequest) {
   try {
+    // Парсимо тіло запиту
     const body = await req.json();
+    // Виконуємо запит до API
     const apiRes = await api.post('auth/login', body);
-
+    // Ініціалізуємо cookieStore
     const cookieStore = await cookies();
+    // Отримуємо значення set-cookie з хедерів
     const setCookie = apiRes.headers['set-cookie'];
 
     if (setCookie) {
+      // Якщо set-cookie — масив, беремо як є, інакше примусово робимо масив
       const cookieArray = Array.isArray(setCookie) ? setCookie : [setCookie];
+      // Проходимо по кожному cookie
       for (const cookieStr of cookieArray) {
         const parsed = parseSetCookie(cookieStr);
 
@@ -32,13 +37,13 @@ export async function POST(req: NextRequest) {
       logErrorResponse(error.response?.data);
       return NextResponse.json(
         { error: error.message, response: error.response?.data },
-        { status: error.status }
+        { status: error.status },
       );
     }
     logErrorResponse({ message: (error as Error).message });
     return NextResponse.json(
       { error: 'Internal Server Error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

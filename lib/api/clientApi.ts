@@ -2,7 +2,7 @@ import { nextServer } from './api';
 
 //AUTH 
 
-export type LoginRequest = {
+export type AuthRequest = {
   email: string;
   password: string;
 };
@@ -13,8 +13,13 @@ export type User = {
   avatar?: string;
 };
 
-export const login = async (data: LoginRequest) => {
+export const login = async (data: AuthRequest) => {
   const res = await nextServer.post<User>('/auth/login', data);
+  return res.data;
+};
+
+export const register = async (data: AuthRequest) => {
+  const res = await nextServer.post<User>('/auth/register', data);
   return res.data;
 };
 

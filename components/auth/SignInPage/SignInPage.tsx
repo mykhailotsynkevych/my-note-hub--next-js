@@ -2,14 +2,14 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login, LoginRequest } from '@/lib/api/clientApi';
+import { login, AuthRequest } from '@/lib/api/clientApi';
 import { useAuthStore } from '@/lib/stores/authStore';
 import { logErrorResponse } from '@/app/api/_utils/utils';
 import Link from 'next/link';
 import css from './SignInPage.module.css';
 
 const SignInPage = () => {
-     const router = useRouter();
+  const router = useRouter();
   const [error, setError] = useState('');
 
   // Отримуємо метод із стора
@@ -18,7 +18,7 @@ const SignInPage = () => {
   const handleSubmit = async (formData: FormData) => {
     try {
       // Типізуємо дані форми
-      const formValues = Object.fromEntries(formData) as LoginRequest;
+      const formValues = Object.fromEntries(formData) as AuthRequest;
       // Виконуємо запит
       const res = await login(formValues);
       // Виконуємо редірект або відображаємо помилку
@@ -37,7 +37,7 @@ const SignInPage = () => {
 
   return (
     <main className={css.mainContent}>
-      <form action={handleSubmit}  className={css.form}>
+      <form action={handleSubmit} className={css.form}>
         <h1 className={css.formTitle}>Sign in</h1>
 
         <label className={css.formGroup}>

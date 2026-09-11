@@ -19,18 +19,24 @@ const Header = async () => {
 
         <nav aria-label="Main Navigation">
           <ul className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50/90 p-1 text-sm font-medium text-slate-600 shadow-sm">
-            <li>
+                    <li>
+            <Link href="/sign-in">Login</Link>
+          </li>
+          <li>
+            <Link href="/sign-up">Register</Link>
+          </li>
+            {/* <li>
               <Link
                 href="/"
                 className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900"
               >
                 Home
               </Link>
-            </li>
+            </li> */}
             {/* <li>
               <CategoriesMenu categories={categories} />
             </li> */}
-                        <Link
+            <Link
               href="/notes/filter/all"
               className="flex items-center justify-between rounded-2xl px-3 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:text-slate-900"
             >
