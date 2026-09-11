@@ -1,9 +1,9 @@
-import { getNotes } from "@/lib/api/clientApi";
+import { getServerNotes } from "@/lib/api/serverApi";
 import NoteList from "@/components/NoteList";
 
 
 const Notes = async () => {
-  const response = await getNotes();
+  const response = await getServerNotes();
 
   return (
     <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">

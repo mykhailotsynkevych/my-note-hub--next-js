@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Note } from "@/lib/api/api";
+import { Note } from "@/lib/api/clientApi";
 
 type Props = {
   item: Note;
@@ -17,9 +17,9 @@ const NoteItem = ({ item }: Props) => {
         <Link href={`/notes/${item.id}`} className="flex h-full flex-col gap-3">        
         <div className="flex items-start justify-between gap-3">
           <h2 className="line-clamp-2 text-lg font-semibold text-slate-900">{item.title}</h2>
-          <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
+          {/* <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
             {item.category.name}
-          </span>
+          </span> */}
         </div>
 
         <p className="line-clamp-4 text-sm leading-6 text-slate-600">{item.content}</p>

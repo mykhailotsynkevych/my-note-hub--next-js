@@ -30,6 +30,15 @@ const Header = async () => {
             {/* <li>
               <CategoriesMenu categories={categories} />
             </li> */}
+                        <Link
+              href="/notes/filter/all"
+              className="flex items-center justify-between rounded-2xl px-3 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:text-slate-900"
+            >
+              <span>Notes</span>
+              {/* <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
+                {categories.length}
+              </span> */}
+            </Link>
             <li>
               <Link
                 href="/profile"

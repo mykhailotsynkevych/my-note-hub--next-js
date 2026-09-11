@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { nextServer } from './api';
-import { User } from './clientApi';
+import { NoteListResponse, User } from './clientApi';
 
 export const checkServerSession = async () => {
   // Дістаємо поточні cookie
@@ -18,6 +18,16 @@ export const checkServerSession = async () => {
 export const getServerMe = async (): Promise<User> => {
   const cookieStore = await cookies();
   const { data } = await nextServer.get('/users/me', {
+    headers: {
+      Cookie: cookieStore.toString(),
+    },
+  });
+  return data;
+};
+
+export const getServerNotes = async (): Promise<NoteListResponse> => {
+  const cookieStore = await cookies();
+  const { data } = await nextServer.get<NoteListResponse>('/notes', {
     headers: {
       Cookie: cookieStore.toString(),
     },
