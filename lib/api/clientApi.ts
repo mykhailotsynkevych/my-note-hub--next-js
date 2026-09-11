@@ -2,16 +2,17 @@ import { nextServer } from './api';
 
 //AUTH 
 
-export type AuthRequest = {
-  email: string;
-  password: string;
-};
-
 export type User = {
   email: string;
   userName?: string;
   avatar?: string;
 };
+
+export type AuthRequest = {
+  email: string;
+  password: string;
+};
+
 
 export const login = async (data: AuthRequest) => {
   const res = await nextServer.post<User>('/auth/login', data);
@@ -21,6 +22,15 @@ export const login = async (data: AuthRequest) => {
 export const register = async (data: AuthRequest) => {
   const res = await nextServer.post<User>('/auth/register', data);
   return res.data;
+};
+
+type CheckSessionRequest = {
+  success: boolean;
+};
+
+export const checkSession = async () => {
+  const res = await nextServer.get<CheckSessionRequest>('/auth/session');
+  return res.data.success;
 };
 
 //NOTES
