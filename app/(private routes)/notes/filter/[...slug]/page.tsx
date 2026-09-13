@@ -1,14 +1,22 @@
-import { getNotes } from '@/lib/api/api';
+import { getServerNotes } from '@/lib/api/serverApi';
 import NoteList from '@/components/NoteList';
+import { NOTE_TAGS, NoteTag } from '@/lib/api/clientApi';
+import { notFound } from 'next/navigation';
 
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
 
-const NotesByCategory = async ({ params }: Props) => {
+const NotesByTag = async ({ params }: Props) => {
   const { slug } = await params;
-  const category = slug[0] === 'all' ? undefined : slug[0];
-  const response = await getNotes(category);
+  const rawTag = slug[0];
+  const tag = rawTag === 'all' ? undefined : rawTag;
+
+  if (tag && !NOTE_TAGS.includes(tag as NoteTag)) {
+    notFound();
+  }
+
+  const response = await getServerNotes(tag as NoteTag | undefined);
 
   return (
     <div>
@@ -17,4 +25,4 @@ const NotesByCategory = async ({ params }: Props) => {
   );
 };
 
-export default NotesByCategory;
+export default NotesByTag;

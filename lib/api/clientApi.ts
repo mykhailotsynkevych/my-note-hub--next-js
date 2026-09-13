@@ -51,17 +51,20 @@ export type NewNoteData = {
   categoryId: string;
 };
 
-export type NoteTag =
-  | 'Work'
-  | 'Personal'
-  | 'Meeting'
-  | 'Shopping'
-  | 'Ideas'
-  | 'Travel'
-  | 'Finance'
-  | 'Health'
-  | 'Important'
-  | 'Todo';
+export const NOTE_TAGS = [
+  'Work',
+  'Personal',
+  'Meeting',
+  'Shopping',
+  'Ideas',
+  'Travel',
+  'Finance',
+  'Health',
+  'Important',
+  'Todo',
+] as const;
+
+export type NoteTag = (typeof NOTE_TAGS)[number];
 
 
 export type Note = {

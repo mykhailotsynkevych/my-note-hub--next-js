@@ -2,13 +2,10 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-// import { Category } from '@/lib/api/api';
-import { NoteTag } from '@/lib/api/clientApi';
-
+import { NOTE_TAGS } from '@/lib/api/clientApi';
 
 const TagsSidebarClient = () => {
   const pathname = usePathname();
-
 
   const isAllActive = pathname === '/notes/filter/all';
 
@@ -37,14 +34,12 @@ const TagsSidebarClient = () => {
 
       <li className="my-1 h-px bg-slate-100" />
 
-      {/* {categories.map((category) => {
-        const href = `/notes/filter/${category.id}`;
+      {NOTE_TAGS.map((tag) => {
+        const href = `/notes/filter/${tag}`;
         const isActive = pathname === href;
-        const noteCount = countsByCategory[category.id] ?? 0;
-        const showCount = noteCount > 0;
 
         return (
-          <li key={category.id}>
+          <li key={tag}>
             <Link
               href={href}
               aria-current={isActive ? 'page' : undefined}
@@ -62,32 +57,13 @@ const TagsSidebarClient = () => {
                       : 'text-slate-700 group-hover:text-slate-900'
                   }`}
                 >
-                  {category.name}
-                </span>
-                <span
-                  className={`line-clamp-1 text-xs ${
-                    isActive ? 'text-sky-700/90' : 'text-slate-400'
-                  }`}
-                >
-                  {category.description || 'No description'}
+                  {tag}
                 </span>
               </span>
-
-              {showCount && (
-                <span
-                  className={`mt-0.5 rounded-full px-2 py-0.5 text-xs font-semibold ${
-                    isActive
-                      ? 'bg-sky-200 text-sky-900'
-                      : 'bg-slate-100 text-slate-600 group-hover:bg-sky-100 group-hover:text-sky-800'
-                  }`}
-                >
-                  {noteCount}
-                </span>
-              )}
             </Link>
           </li>
         );
-      })} */}
+      })}
     </ul>
   );
 };
