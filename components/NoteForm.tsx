@@ -1,13 +1,17 @@
 'use client';
 
-import { createNote, NewNoteData, NOTE_TAGS } from '@/lib/api/clientApi';
+import { createNote, NewNoteData, NOTE_TAGS, Note, updateNote } from '@/lib/api/clientApi';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useNoteDraftStore } from '@/lib/stores/noteStore';
 
+type Props = {
+  note?: Note;
+};
 
-const NoteForm = () => {
+const NoteForm = ({ note }: Props) => {
   const router = useRouter();
+  const isEdit = Boolean(note);
   //STORE
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
   // Оголошуємо функцію для onChange щоб при зміні будь-якого
@@ -18,25 +22,34 @@ const NoteForm = () => {
     >,
   ) => {
     // 4. Коли користувач змінює будь-яке поле форми — оновлюємо стан
+    if (isEdit) return;
     setDraft({
       ...draft,
       [event.target.name]: event.target.value,
     });
   };
   const { mutate, isPending, isError } = useMutation({
-    mutationFn: createNote,
+    mutationFn: (values: NewNoteData) =>
+      isEdit ? updateNote(note!.id, values) : createNote(values),
     onSuccess: () => {
+      if (isEdit) {
+        router.push(`/notes/${note!.id}`);
+        return;
+      }
       clearDraft();
       router.push('/notes/filter/all');
     },
   });
 
-  const handleCancel = () => router.push('/notes/filter/all');
+  const handleCancel = () =>
+    router.push(isEdit ? `/notes/${note!.id}` : '/notes/filter/all');
 
   const handleSubmit = (formData: FormData) => {
     const values = Object.fromEntries(formData) as NewNoteData;
     mutate(values);
   };
+
+  const defaults = isEdit ? note : draft;
 
   return (
     <form action={handleSubmit} className="mt-8 grid gap-6">
@@ -45,7 +58,7 @@ const NoteForm = () => {
         <input
           type="text"
           name="title"
-          defaultValue={draft?.title}
+          defaultValue={defaults?.title}
           onChange={handleChange}
           required
           minLength={3}
@@ -59,7 +72,7 @@ const NoteForm = () => {
         <span className="text-sm font-semibold text-slate-700">Content</span>
         <textarea
           name="content"
-          defaultValue={draft?.content}
+          defaultValue={defaults?.content}
           onChange={handleChange}
           required
           minLength={10}
@@ -74,7 +87,7 @@ const NoteForm = () => {
         <select
           name="tag"
           required
-          defaultValue={draft?.tag}
+          defaultValue={defaults?.tag}
           onChange={handleChange}
           className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100"
         >
@@ -88,7 +101,9 @@ const NoteForm = () => {
 
       {isError && (
         <p className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-700">
-          Failed to create note. Please check your input and try again.
+          {isEdit
+            ? 'Failed to update note. Please check your input and try again.'
+            : 'Failed to create note. Please check your input and try again.'}
         </p>
       )}
 
@@ -98,7 +113,9 @@ const NoteForm = () => {
           disabled={isPending}
           className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isPending ? 'Creating...' : 'Create'}
+          {isEdit
+            ? isPending ? 'Saving...' : 'Save'
+            : isPending ? 'Creating...' : 'Create'}
         </button>
         <button
           type="button"

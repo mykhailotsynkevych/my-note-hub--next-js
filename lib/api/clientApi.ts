@@ -99,5 +99,15 @@ export const getSingleNote = async (id: string) => {
   return res.data;
 };
 
+export const updateNote = async (id: string, data: NewNoteData) => {
+  const res = await nextServer.patch<Note>(`/notes/${id}`, data);
+  return res.data;
+};
+
+// export const deleteNote = async (id: string) => {
+//   const res = await nextServer.delete<Note>(`/notes/${id}`);
+//   return res.data;
+// };
+
 
 

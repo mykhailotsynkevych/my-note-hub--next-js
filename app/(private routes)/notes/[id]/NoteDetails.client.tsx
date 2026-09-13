@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import { getSingleNote } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { notFound } from 'next/navigation';
+import Link from 'next/link';
 
 const NoteDetailsClient = () => {
   const { id } = useParams<{ id: string }>();
@@ -49,14 +50,22 @@ const handleGoBack = () => {
 
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8 px-4 py-10 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-4">
-          <button
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur transition hover:border-slate-300 hover:text-slate-900"
-            onClick={handleGoBack}
-          >
-            {' '}
-            <span aria-hidden="true">←</span>
-            Back to notes
-          </button>
+          <div className="flex flex-wrap justify-between items-center gap-3">
+            <button
+              className="inline-flex w-fit items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-700 shadow-sm backdrop-blur transition hover:border-slate-300 hover:text-slate-900"
+              onClick={handleGoBack}
+            >
+              {' '}
+              <span aria-hidden="true">←</span>
+              Back to notes
+            </button>
+            <Link
+              href={`/notes/${id}/edit`}
+              className="inline-flex w-fit items-center gap-2 rounded-full bg-[#0d6efd] px-4 py-2 text-sm font-medium text-white shadow-sm transition hover:bg-sky-600"
+            >
+              Edit note
+            </Link>
+          </div>
 
           <div className="max-w-3xl">
             <span className="inline-flex rounded-full bg-sky-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-sky-700">
