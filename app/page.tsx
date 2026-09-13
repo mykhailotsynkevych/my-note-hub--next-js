@@ -1,5 +1,5 @@
-import SignInPage from '@/components/auth/SignInPage/SignInPage';
+import Home from '@/components/Home/Home';
 
-export default function Home() {
-  return <SignInPage />;
+export default function Page() {
+  return <Home />;
 }
