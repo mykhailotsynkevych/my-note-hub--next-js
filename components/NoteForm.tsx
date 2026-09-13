@@ -33,7 +33,8 @@ const NoteForm = ({ note }: Props) => {
       isEdit ? updateNote(note!.id, values) : createNote(values),
     onSuccess: () => {
       if (isEdit) {
-        router.push(`/notes/${note!.id}`);
+        // replace so the edit page isn't left in history behind the details page
+        router.replace(`/notes/${note!.id}`);
         return;
       }
       clearDraft();
@@ -42,7 +43,9 @@ const NoteForm = ({ note }: Props) => {
   });
 
   const handleCancel = () =>
-    router.push(isEdit ? `/notes/${note!.id}` : '/notes/filter/all');
+    isEdit
+      ? router.replace(`/notes/${note!.id}`)
+      : router.push('/notes/filter/all');
 
   const handleSubmit = (formData: FormData) => {
     const values = Object.fromEntries(formData) as NewNoteData;

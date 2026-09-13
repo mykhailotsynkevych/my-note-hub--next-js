@@ -27,13 +27,13 @@ const Home = () => {
               <>
                 <Link
                   href="/notes/filter/all"
-                  className="rounded-full bg-slate-950 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/20 transition hover:-translate-y-0.5 hover:bg-slate-800"
+                  className="rounded-md bg-[#0d6efd] px-6 py-3 text-sm font-bold text-white shadow-lg shadow-slate-900/20 transition hover:-translate-y-0.5 hover:bg-slate-800"
                 >
                   Open notes
                 </Link>
                 <Link
                   href="/profile"
-                  className="rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-50"
+                  className="rounded-md border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-50"
                 >
                   Profile
                 </Link>
