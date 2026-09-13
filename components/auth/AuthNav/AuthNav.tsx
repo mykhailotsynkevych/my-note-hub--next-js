@@ -38,9 +38,6 @@ const AuthNav = () => {
                 className="flex items-center justify-between rounded-md px-3 py-1 text-sm font-medium text-white transition hover:bg-white hover:text-slate-900"
               >
                 <span>Notes</span>
-                {/* <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
-                {categories.length}
-              </span> */}
               </Link>
             </li>
             <li className={css.navigationItem}>
