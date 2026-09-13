@@ -6,6 +6,7 @@ import { logErrorResponse } from '../../_utils/utils';
 
 export async function POST() {
   try {
+     // Передаємо поточні cookie до API
     const cookieStore = await cookies();
 
     const accessToken = cookieStore.get('accessToken')?.value;
