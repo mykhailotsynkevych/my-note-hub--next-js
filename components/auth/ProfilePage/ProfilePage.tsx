@@ -26,7 +26,7 @@ const ProfilePage = async () => {
 
         <div className={css.profileInfo}>
           <div className={css.usernameWrapper}>
-            <p>Username: {user.userName}</p>
+            <p>Username: {user.username}</p>
           </div>
           <p>Email: {user.email}</p>
         </div>

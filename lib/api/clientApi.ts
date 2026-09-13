@@ -4,7 +4,7 @@ import { nextServer } from './api';
 
 export type User = {
   email: string;
-  userName?: string;
+  username?: string;
   avatar?: string;
 };
 
@@ -37,6 +37,16 @@ export const checkSession = async () => {
 export const getMe = async () => {
   const { data } = await nextServer.get<User>('/users/me');
   return data;
+};
+
+export type UpdateUserRequest = {
+  email?: string;
+  username?: string;
+};
+
+export const updateMe = async (data: UpdateUserRequest) => {
+  const res = await nextServer.patch<User>('/users/me', data);
+  return res.data;
 };
 
 export const logout = async (): Promise<void> => {
