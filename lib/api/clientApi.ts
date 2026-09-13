@@ -51,6 +51,18 @@ export type NewNoteData = {
   categoryId: string;
 };
 
+export type NoteTag =
+  | 'Work'
+  | 'Personal'
+  | 'Meeting'
+  | 'Shopping'
+  | 'Ideas'
+  | 'Travel'
+  | 'Finance'
+  | 'Health'
+  | 'Important'
+  | 'Todo';
+
 
 export type Note = {
   id: string;
@@ -59,7 +71,7 @@ export type Note = {
   createdAt: string;
   updatedAt: string;
   userId: string;
-  tag: string;
+  tag: NoteTag;
   // category: {
   //   id: string;
   //   name: string;
@@ -84,9 +96,9 @@ export type NoteListResponse = {
 };
 
 
-export const getNotes = async () => {
+export const getNotes = async (tag?: NoteTag) => {
   const res = await nextServer.get<NoteListResponse>('/notes', {
-    // params: { categoryId },
+    params: { tag },
   });
   return res.data;
 };

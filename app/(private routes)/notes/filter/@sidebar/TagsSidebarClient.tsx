@@ -3,15 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 // import { Category } from '@/lib/api/api';
+import { NoteTag } from '@/lib/api/clientApi';
 
-type Props = {
-  // categories: Category[];
-  // countsByCategory: Record<string, number>;
-  allNotesCount: number;
-};
 
-const CategoriesSidebarClient = ({  allNotesCount }: Props) => {
+const TagsSidebarClient = () => {
   const pathname = usePathname();
+
 
   const isAllActive = pathname === '/notes/filter/all';
 
@@ -33,7 +30,7 @@ const CategoriesSidebarClient = ({  allNotesCount }: Props) => {
               isAllActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
             }`}
           >
-            {allNotesCount}
+            allNotesCount
           </span>
         </Link>
       </li>
@@ -95,4 +92,4 @@ const CategoriesSidebarClient = ({  allNotesCount }: Props) => {
   );
 };
 
-export default CategoriesSidebarClient;
+export default TagsSidebarClient;
