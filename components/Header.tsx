@@ -1,10 +1,7 @@
 import Link from 'next/link';
-// import { getCategories } from '@/lib/api';
-import CategoriesMenu from './CategoriesMenu';
+import AuthNav from '../components/auth/AuthNav/AuthNav';
 
 const Header = async () => {
-  // const categories = await getCategories();
-
   return (
     <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/85 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
@@ -18,13 +15,7 @@ const Header = async () => {
         </Link>
 
         <nav aria-label="Main Navigation">
-          <ul className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50/90 p-1 text-sm font-medium text-slate-600 shadow-sm">
-                    <li>
-            <Link href="/sign-in">Login</Link>
-          </li>
-          <li>
-            <Link href="/sign-up">Register</Link>
-          </li>
+          <ul className="flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900 p-1 text-sm font-medium text-white shadow-sm">
             {/* <li>
               <Link
                 href="/"
@@ -38,21 +29,14 @@ const Header = async () => {
             </li> */}
             <Link
               href="/notes/filter/all"
-              className="flex items-center justify-between rounded-2xl px-3 py-2.5 text-sm font-medium text-slate-700 transition hover:bg-slate-50 hover:text-slate-900"
+              className="flex items-center justify-between rounded-2xl px-3 py-2.5 text-sm font-medium text-white transition hover:bg-white hover:text-slate-900"
             >
               <span>Notes</span>
               {/* <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs text-slate-500">
                 {categories.length}
               </span> */}
             </Link>
-            <li>
-              <Link
-                href="/profile"
-                className="rounded-full px-4 py-2 transition hover:bg-white hover:text-slate-900"
-              >
-                Profile
-              </Link>
-            </li>
+            <AuthNav />
           </ul>
         </nav>
       </div>

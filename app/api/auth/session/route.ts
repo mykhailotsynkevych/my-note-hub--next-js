@@ -32,7 +32,7 @@ export async function GET() {
       // Виконуємо запит до API, передаючи всі cookie у заголовку
       const apiRes = await api.get('auth/session', {
         headers: {
-          Cookie: cookieStore.toString(),// перетворюємо cookie у рядок
+          Cookie: cookieStore.toString(), // перетворюємо cookie у рядок
         },
       });
 

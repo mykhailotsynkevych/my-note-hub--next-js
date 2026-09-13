@@ -6,12 +6,13 @@ import '../styles/globals.css';
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import AuthProvider from '@/components/auth/AuthProvider/AuthProvider';
 
 const roboto = Roboto({
-  subsets: ['latin'], 
+  subsets: ['latin'],
   weight: ['400', '700'],
-  variable: '--font-roboto', 
-  display: 'swap', 
+  variable: '--font-roboto',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -21,28 +22,27 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-    modal,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
-    modal: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${roboto.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${roboto.variable} h-full antialiased`}>
       <body
         suppressHydrationWarning
         className="flex min-h-full flex-col bg-slate-50 text-slate-900"
       >
         <TanStackProvider>
-          <Header />
-          <main className="flex-1">
-            {children}
-            {modal}
-          </main>
+          <AuthProvider>
+            <Header />
+            <main className="flex-1">
+              {children}
+              {modal}
+            </main>
 
-          <Footer />
+            <Footer />
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>

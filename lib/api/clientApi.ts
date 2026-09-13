@@ -14,6 +14,10 @@ export type AuthRequest = {
 };
 
 
+type CheckSessionRequest = {
+  success: boolean;
+};
+
 export const login = async (data: AuthRequest) => {
   const res = await nextServer.post<User>('/auth/login', data);
   return res.data;
@@ -24,13 +28,15 @@ export const register = async (data: AuthRequest) => {
   return res.data;
 };
 
-type CheckSessionRequest = {
-  success: boolean;
-};
 
 export const checkSession = async () => {
   const res = await nextServer.get<CheckSessionRequest>('/auth/session');
   return res.data.success;
+};
+
+export const getMe = async () => {
+  const { data } = await nextServer.get<User>('/users/me');
+  return data;
 };
 
 //NOTES
