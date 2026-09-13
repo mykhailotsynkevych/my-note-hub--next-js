@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Note } from "@/lib/api/clientApi";
+import { TAG_COLORS } from '@/lib/tagColors';
 
 type Props = {
   item: Note;
@@ -17,7 +18,7 @@ const NoteItem = ({ item }: Props) => {
         <Link href={`/notes/${item.id}`} className="flex h-full flex-col gap-3">        
         <div className="flex items-start justify-between gap-3">
           <h2 className="line-clamp-2 text-lg font-semibold text-[#0d6efd]">{item.title}</h2>
-          <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
+          <span className={`rounded-md px-2.5 py-1 text-xs font-medium ${TAG_COLORS[item.tag]}`}>
             {item.tag}
           </span>
         </div>

@@ -1,9 +1,15 @@
 import { getServerNotes } from "@/lib/api/serverApi";
 import NoteList from "@/components/NoteList";
+import Pagination from "@/components/Pagination";
 
+type Props = {
+  searchParams: Promise<{ page?: string }>;
+};
 
-const Notes = async () => {
-  const response = await getServerNotes();
+const Notes = async ({ searchParams }: Props) => {
+  const { page } = await searchParams;
+  const currentPage = Number(page ?? 1);
+  const response = await getServerNotes(undefined, currentPage);
 
   return (
     <section className="mx-auto w-full max-w-7xl px-4 pb-10 sm:px-6 lg:px-8">
@@ -19,6 +25,7 @@ const Notes = async () => {
         </p>
       </div>
       {response?.notes?.length > 0 && <NoteList notes={response.notes} />}
+      <Pagination totalPages={response.totalPages} currentPage={currentPage} />
     </section>
   );
 }

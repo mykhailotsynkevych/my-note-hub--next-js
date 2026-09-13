@@ -25,10 +25,13 @@ export const getServerMe = async (): Promise<User> => {
   return data;
 };
 
-export const getServerNotes = async (tag?: NoteTag): Promise<NoteListResponse> => {
+export const getServerNotes = async (
+  tag?: NoteTag,
+  page = 1
+): Promise<NoteListResponse> => {
   const cookieStore = await cookies();
   const { data } = await nextServer.get<NoteListResponse>('/notes', {
-    params: { tag },
+    params: { tag, page },
     headers: {
       Cookie: cookieStore.toString(),
     },

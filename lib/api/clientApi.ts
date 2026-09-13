@@ -99,9 +99,9 @@ export type NoteListResponse = {
 };
 
 
-export const getNotes = async (tag?: NoteTag) => {
+export const getNotes = async (tag?: NoteTag, page = 1) => {
   const res = await nextServer.get<NoteListResponse>('/notes', {
-    params: { tag },
+    params: { tag, page },
   });
   return res.data;
 };
