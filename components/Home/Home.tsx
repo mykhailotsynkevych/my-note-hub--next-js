@@ -19,7 +19,7 @@ const Home = () => {
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-            NoteHub helps you collect thoughts, sort them by category, and return to the right note without digging through noise.
+            NoteHub helps you collect thoughts, sort them by tag, and return to the right note without digging through noise.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">

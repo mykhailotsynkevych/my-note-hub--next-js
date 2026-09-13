@@ -22,10 +22,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en" className={`${roboto.variable} h-full antialiased`}>
@@ -38,7 +36,6 @@ export default function RootLayout({
             <Header />
             <main className="flex flex-1 flex-col">
               {children}
-              {modal}
             </main>
 
             <Footer />

@@ -24,7 +24,7 @@ const CreateNote = async () => {
             Create a note
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
-            Capture your idea, choose a category, and save it to your notes collection.
+            Capture your idea, choose a tag, and save it to your notes collection.
           </p>
 
           <NoteForm />
