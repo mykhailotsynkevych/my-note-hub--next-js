@@ -3,7 +3,7 @@ const Loading = () => {
     <section className="relative isolate overflow-hidden">
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(14,165,233,0.16),transparent_34%),radial-gradient(circle_at_top_right,rgba(251,191,36,0.18),transparent_28%),linear-gradient(180deg,#f8fafc_0%,#ffffff_72%)]" />
 
-      <div className="mx-auto flex min-h-[calc(100vh-140px)] w-full max-w-6xl flex-col px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto flex min-h-[calc(100vh-140px)] w-full max-w-7xl flex-col px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-8 max-w-2xl">
           <div className="h-3 w-24 animate-pulse rounded-full bg-sky-200" />
           <div className="mt-4 h-10 w-64 animate-pulse rounded-xl bg-slate-200" />

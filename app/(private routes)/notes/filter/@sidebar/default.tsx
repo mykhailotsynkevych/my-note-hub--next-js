@@ -16,12 +16,12 @@ const NotesSidebar = async () => {
       <div className="border-b border-slate-100 px-3 py-3">
         <Link
           href="/notes/action/create"
-          className="group flex items-center justify-between rounded-2xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800"
+          className="group flex items-center justify-between rounded-md bg-[#0d6efd] px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-slate-800"
         >
           <span>Create note</span>
           <span
             aria-hidden="true"
-            className="rounded-full bg-white/15 px-2 py-0.5 text-xs text-slate-100 transition group-hover:bg-white/25"
+            className="rounded-md bg-white/15 px-2 py-0.5 text-xs text-slate-100 transition group-hover:bg-white/25"
           >
             +
           </span>

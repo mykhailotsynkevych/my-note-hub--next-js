@@ -13,11 +13,11 @@ const NoteItem = ({ item }: Props) => {
   });
 
   return (
-    <li className="group rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md">
+    <li className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md">
         <Link href={`/notes/${item.id}`} className="flex h-full flex-col gap-3">        
         <div className="flex items-start justify-between gap-3">
-          <h2 className="line-clamp-2 text-lg font-semibold text-slate-900">{item.title}</h2>
-          <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
+          <h2 className="line-clamp-2 text-lg font-semibold text-[#0d6efd]">{item.title}</h2>
+          <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-700">
             {item.tag}
           </span>
         </div>

@@ -8,7 +8,7 @@ const Home = () => {
 
   return (
     <main className="min-h-[calc(100vh-88px)] overflow-hidden bg-[radial-gradient(circle_at_top_left,#e0f2fe_0,#ffffff_34%,#f8fafc_100%)]">
-      <section className="mx-auto grid w-full max-w-6xl items-center gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20">
+      <section className="mx-auto grid w-full max-w-7xl items-center gap-12 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20">
         <div>
           <span className="inline-flex rounded-md border border-sky-200 bg-white/80 px-4 py-2 text-sm font-semibold text-sky-700 shadow-sm">
             Personal notes workspace
