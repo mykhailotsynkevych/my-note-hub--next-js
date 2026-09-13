@@ -1,8 +1,8 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
-import { getSingleNote } from '@/lib/api/clientApi';
+import { deleteNote, getSingleNote } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -44,9 +44,20 @@ const NoteDetailsClient = () => {
   });
 
 const handleGoBack = () => {
-  const isSure = confirm('Are you sure?');
-  if (isSure) {
     router.push('/notes/filter/all');
+};
+
+const { mutate: removeNote, isPending: isDeleting } = useMutation({
+  mutationFn: () => deleteNote(id),
+  onSuccess: () => {
+    router.push('/notes/filter/all');
+  },
+});
+
+const handleDelete = () => {
+  const isSure = confirm('Delete this note? This cannot be undone.');
+  if (isSure) {
+    removeNote();
   }
 };
 
@@ -65,12 +76,22 @@ const handleGoBack = () => {
               <span aria-hidden="true">←</span>
               Back to notes
             </button>
+            <div className="flex items-center gap-3">
             <Link
               href={`/notes/${id}/edit`}
               className="inline-flex w-fit items-center gap-2 rounded-md bg-[#0d6efd] px-4 py-2 text-md font-medium text-white shadow-sm transition hover:bg-sky-600"
             >
               Edit note
             </Link>
+            <button
+              type="button"
+              onClick={handleDelete}
+              disabled={isDeleting}
+              className="inline-flex w-fit items-center gap-2 rounded-md bg-rose-600 px-4 py-2 text-md font-medium text-white shadow-sm transition hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isDeleting ? 'Deleting...' : 'Delete note'}
+            </button>
+            </div>
           </div>
 
           <div className="max-w-3xl">

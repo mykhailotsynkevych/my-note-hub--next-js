@@ -24,7 +24,7 @@ const Notes = async ({ searchParams }: Props) => {
           One place for your ideas, drafts, and everything worth saving.
         </p>
       </div>
-      {response?.notes?.length > 0 && <NoteList notes={response.notes} />}
+      <NoteList notes={response.notes} />
       <Pagination totalPages={response.totalPages} currentPage={currentPage} />
     </section>
   );

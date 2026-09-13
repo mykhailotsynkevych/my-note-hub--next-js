@@ -1,5 +1,9 @@
+'use client';
+
 import Link from 'next/link';
-import { Note } from "@/lib/api/clientApi";
+import { useRouter } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+import { deleteNote, Note } from "@/lib/api/clientApi";
 import { TAG_COLORS } from '@/lib/tagColors';
 
 type Props = {
@@ -7,11 +11,28 @@ type Props = {
 };
 
 const NoteItem = ({ item }: Props) => {
+  const router = useRouter();
   const createdAt = new Date(item.createdAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
     day: "numeric",
   });
+
+  const { mutate: removeNote, isPending: isDeleting } = useMutation({
+    mutationFn: () => deleteNote(item.id),
+    onSuccess: () => {
+      router.refresh();
+    },
+  });
+
+  const handleDelete = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const isSure = confirm('Delete this note? This cannot be undone.');
+    if (isSure) {
+      removeNote();
+    }
+  };
 
   return (
     <li className="group rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md">
@@ -26,8 +47,15 @@ const NoteItem = ({ item }: Props) => {
         <p className="line-clamp-4 text-sm leading-6 text-slate-600">{item.content}</p>
 
         <div className="mt-auto flex items-center justify-between border-t border-slate-100 pt-3 text-xs text-slate-500">
-          <span>ID: {item.id.slice(0, 8)}</span>
           <time dateTime={item.createdAt}>{createdAt}</time>
+        <button
+          type="button"
+          onClick={handleDelete}
+          disabled={isDeleting}
+          className="inline-flex w-fit items-center rounded-md border border-rose-200 bg-rose-50 px-2.5 py-1 text-xs font-medium text-rose-700 transition hover:border-rose-300 hover:bg-rose-100 disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {isDeleting ? 'Deleting...' : 'Delete'}
+        </button>
         </div>
         </Link>
     </li>

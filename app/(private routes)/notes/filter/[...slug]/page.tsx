@@ -24,7 +24,7 @@ const NotesByTag = async ({ params, searchParams }: Props) => {
 
   return (
     <div>
-      {response?.notes?.length > 0 && <NoteList notes={response.notes} />}
+      <NoteList notes={response.notes} tag={tag as NoteTag | undefined} />
       <Pagination totalPages={response.totalPages} currentPage={currentPage} />
     </div>
   );

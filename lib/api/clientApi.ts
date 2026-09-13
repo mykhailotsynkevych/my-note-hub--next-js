@@ -104,10 +104,10 @@ export const updateNote = async (id: string, data: NewNoteData) => {
   return res.data;
 };
 
-// export const deleteNote = async (id: string) => {
-//   const res = await nextServer.delete<Note>(`/notes/${id}`);
-//   return res.data;
-// };
+export const deleteNote = async (id: string) => {
+  const res = await nextServer.delete<Note>(`/notes/${id}`);
+  return res.data;
+};
 
 
 
