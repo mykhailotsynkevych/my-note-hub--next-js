@@ -1,15 +1,12 @@
 'use client';
 
-import {  createNote, NewNoteData } from '@/lib/api/api';
+import { createNote, NewNoteData, NOTE_TAGS } from '@/lib/api/clientApi';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useNoteDraftStore } from '@/lib/stores/noteStore';
 
-type Props = {
-  categories: Category[];
-};
 
-const NoteForm = ({ categories }: Props) => {
+const NoteForm = () => {
   const router = useRouter();
   //STORE
   const { draft, setDraft, clearDraft } = useNoteDraftStore();
@@ -73,17 +70,17 @@ const NoteForm = ({ categories }: Props) => {
       </label>
 
       <label className="grid gap-2">
-        <span className="text-sm font-semibold text-slate-700">Category</span>
+        <span className="text-sm font-semibold text-slate-700">Tag</span>
         <select
-          name="categoryId"
+          name="tag"
           required
-          defaultValue={draft?.categoryId}
+          defaultValue={draft?.tag}
           onChange={handleChange}
           className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-slate-900 outline-none transition focus:border-sky-300 focus:ring-4 focus:ring-sky-100"
         >
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
+          {NOTE_TAGS.map((tag) => (
+            <option key={tag} value={tag}>
+              {tag}
             </option>
           ))}
         </select>

@@ -3,23 +3,12 @@ import {
   HydrationBoundary,
   dehydrate,
 } from '@tanstack/react-query';
-import { getSingleNote } from '@/lib/api/api';
+import { getSingleNote } from '@/lib/api/clientApi';
 import NoteDetailsClient from './NoteDetails.client';
 
 type Props = {
   params: Promise<{ id: string }>;
 };
-
-//SEO Metadata
-
-// export async function generateMetadata({ params }: Props) {
-//   const { id } = await params
-//   const note = await getSingleNote(id)
-//   return {
-//     title: `Note: ${note.title}`,
-//     description: note.content.slice(0, 30),
-//   }
-// }
 
 //SEO Metadata with Open Graph
 

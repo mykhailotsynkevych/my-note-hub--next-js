@@ -1,9 +1,7 @@
-import { getCategories } from '@/lib/api/api';
 import NoteForm from '@/components/NoteForm';
 import Link from 'next/link';
 
 const CreateNote = async () => {
-  const categories = await getCategories();
 
   return (
     <section className="relative isolate overflow-hidden">
@@ -29,7 +27,7 @@ const CreateNote = async () => {
             Capture your idea, choose a category, and save it to your notes collection.
           </p>
 
-          <NoteForm categories={categories} />
+          <NoteForm />
         </div>
       </div>
     </section>

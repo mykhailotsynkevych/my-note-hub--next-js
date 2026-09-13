@@ -2,7 +2,7 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
-import { getSingleNote } from '@/lib/api/api';
+import { getSingleNote } from '@/lib/api/clientApi';
 import { useRouter } from 'next/navigation';
 import { notFound } from 'next/navigation';
 
@@ -75,7 +75,7 @@ const handleGoBack = () => {
                 ID: {note.id.slice(0, 8)}
               </span>
               <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
-                Category: {note.categoryId}
+                Tag: {note.tag}
               </span>
             </div>
 

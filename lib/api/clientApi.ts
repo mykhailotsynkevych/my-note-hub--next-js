@@ -45,12 +45,6 @@ export const logout = async (): Promise<void> => {
 
 //NOTES
 
-export type NewNoteData = {
-  title: string;
-  content: string;
-  categoryId: string;
-};
-
 export const NOTE_TAGS = [
   'Work',
   'Personal',
@@ -66,6 +60,11 @@ export const NOTE_TAGS = [
 
 export type NoteTag = (typeof NOTE_TAGS)[number];
 
+export type NewNoteData = {
+  title: string;
+  content: string;
+  tag: NoteTag;
+};
 
 export type Note = {
   id: string;
@@ -75,23 +74,7 @@ export type Note = {
   updatedAt: string;
   userId: string;
   tag: NoteTag;
-  // category: {
-  //   id: string;
-  //   name: string;
-  //   description: string;
-  //   createdAt: string;
-  //   updatedAt: string;
-  // };
-  // categoryId: string;
 };
-
-// export type Category = {
-//   id: string;
-//   name: string;
-//   description: string;
-//   createdAt: string;
-//   updatedAt: string;
-// };
 
 export type NoteListResponse = {
   notes: Note[];
@@ -106,18 +89,15 @@ export const getNotes = async (tag?: NoteTag, page = 1) => {
   return res.data;
 };
 
-// export const getSingleNote = async (id: string) => {
-//   const res = await axios.get<Note>(`/notes/${id}`);
-//   return res.data;
-// };
+export const createNote = async (data: NewNoteData) => {
+  const res = await nextServer.post<Note>('/notes', data);
+  return res.data;
+};
 
-// export const getCategories = async () => {
-//   const res = await axios.get<Category[]>('/categories');
-//   return res.data;
-// };
+export const getSingleNote = async (id: string) => {
+  const res = await nextServer.get<Note>(`/notes/${id}`);
+  return res.data;
+};
 
-// export const createNote = async (data: NewNoteData) => {
-//   const res = await axios.post<Note>('/notes', data);
-//   return res.data;
-// };
+
 
