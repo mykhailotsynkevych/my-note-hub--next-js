@@ -1,4 +1,4 @@
-import { getSingleNote } from '@/lib/api/api';
+import { getSingleNote } from '@/lib/api/clientApi';
 import Modal from '@/components/Modal';
 
 type Props = {
